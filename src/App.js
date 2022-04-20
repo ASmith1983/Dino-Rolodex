@@ -7,33 +7,36 @@ class App extends Component {
  constructor() {
     super();
     this.state = {
-      name: "Dino-name"
-      
-    }
+     dinos: [],     
+    };
+ }
+
+ componentDidMount() {
+  fetch('https://dinosaur-facts-api.shultzlab.com/dinosaurs')
+    .then(response => response.json())
+    .then((dinoData) => this.setState(
+      () => {
+      return {dinos: dinoData}
+      },
+      () => {
+        console.log(this.state);
+      }
+    ));
  }
 
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        
+        {
+          this.state.dinos.map((dino) => {
+            return (<div key={dino.id}>
+                       <h1 >{dino.Name}</h1>
+                   </div>)
+          })
+        }
 
-          <p>Hello {this.state.name}</p>
-
-          <button onClick={() => {
-              // this.setState({ name: 'Trex'})
-              // this.state.name = 'Trex'....or
-              this.setState(() => {
-                return {
-                  name: 'Stegosaurus'
-                }
-              }, () => {
-                console.log(this.state)
-              });    
-              console.log(this.state);
-          }}>Change name</button>
-        </header>
       </div>
     );
 

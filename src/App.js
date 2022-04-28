@@ -7,7 +7,8 @@ class App extends Component {
  constructor() {
     super();
     this.state = {
-     dinos: [],     
+     dinos: [], 
+     searchField: ''    
     };
     console.log('constructor');
  }
@@ -26,27 +27,29 @@ class App extends Component {
     ));
  }
 
+ onSearchChange = (event) => {
+  console.log(event.target.value);
+  const searchField = event.target.value.toLowerCase();
+  this.setState(() => {
+    return { searchField };
+  });
+}
 
   render() {
     console.log('render');
+
+    const filteredDinos = this.state.dinos.filter((dino) => {
+      return dino.Name.toLowerCase().includes(this.state.searchField);
+    });
+
+
+
     return (
       <div className="App">
-        <input className='search-box' type='search' placeholder='search dinos' onChange={(event) => {
-          console.log(event.target.value);
-
-          const searchString = event.target.value.toLowerCase();
-          const filteredDinos = this.state.dinos.filter((dino) => {
-            return dino.Name.toLowerCase().includes(searchString);
-          });
-          
-          this.setState(() => {
-            return { dinos: filteredDinos };
-          });
-
-        }}/>
+        <input className='search-box' type='search' placeholder='search dinos' onChange={this.onSearchChange}/>
 
         {
-          this.state.dinos.map((dino) => {
+          filteredDinos.map((dino) => {
             return (<div key={dino.id}>
                        <h1 >{dino.Name}-{dino.Description}</h1>
                    </div>)

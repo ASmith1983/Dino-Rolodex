@@ -9,9 +9,11 @@ class App extends Component {
     this.state = {
      dinos: [],     
     };
+    console.log('constructor');
  }
 
  componentDidMount() {
+   console.log('componentDidMount');
   fetch('https://dinosaur-facts-api.shultzlab.com/dinosaurs')
     .then(response => response.json())
     .then((dinoData) => this.setState(
@@ -26,13 +28,27 @@ class App extends Component {
 
 
   render() {
+    console.log('render');
     return (
       <div className="App">
-        
+        <input className='search-box' type='search' placeholder='search dinos' onChange={(event) => {
+          console.log(event.target.value);
+
+          const searchString = event.target.value.toLowerCase();
+          const filteredDinos = this.state.dinos.filter((dino) => {
+            return dino.Name.toLowerCase().includes(searchString);
+          });
+          
+          this.setState(() => {
+            return { dinos: filteredDinos };
+          });
+
+        }}/>
+
         {
           this.state.dinos.map((dino) => {
             return (<div key={dino.id}>
-                       <h1 >{dino.Name}</h1>
+                       <h1 >{dino.Name}-{dino.Description}</h1>
                    </div>)
           })
         }

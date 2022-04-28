@@ -38,15 +38,18 @@ class App extends Component {
   render() {
     console.log('render');
 
-    const filteredDinos = this.state.dinos.filter((dino) => {
-      return dino.Name.toLowerCase().includes(this.state.searchField);
+    const { dinos, searchField } = this.state;
+    const { onSearchChange } = this;
+
+    const filteredDinos = dinos.filter((dino) => {
+      return dino.Name.toLowerCase().includes(searchField);
     });
 
 
 
     return (
       <div className="App">
-        <input className='search-box' type='search' placeholder='search dinos' onChange={this.onSearchChange}/>
+        <input className='search-box' type='search' placeholder='search dinos' onChange={onSearchChange}/>
 
         {
           filteredDinos.map((dino) => {

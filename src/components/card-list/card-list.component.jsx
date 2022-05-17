@@ -10,7 +10,7 @@ class CardList extends Component{
                 {dinos.map((dino) => (
                     <div className='card-container' key={dino.id}>
                         {/* <img src={`https://dinosaurpictures.org/${dino.Name}-pictures`} alt={`${dino.Name}`} /> */}
-                        <h2>{dino.Name}</h2>
+                        <h1>{dino.Name}</h1>
                         <h2>{dino.Description}</h2>
                     </div>
                 ))}

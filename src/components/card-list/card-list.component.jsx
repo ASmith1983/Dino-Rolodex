@@ -1,16 +1,21 @@
 import { Component } from "react";
+import './card-list.component.css'
 
 class CardList extends Component{
     render(){
         console.log('render from cardlist');
         const { dinos } = this.props;
-        return <div>
-            
-                {dinos.map((dinos) => (
-                  <h1 key={dinos.id}>{dinos.Name}</h1>
+        return (
+            <div className='card-list'>
+                {dinos.map((dino) => (
+                    <div className='card-container' key={dino.id}>
+                        {/* <img src={`https://dinosaurpictures.org/${dino.Name}-pictures`} alt={`${dino.Name}`} /> */}
+                        <h2>{dino.Name}</h2>
+                        <h2>{dino.Description}</h2>
+                    </div>
                 ))}
-
-               </div>
+            </div>
+        )
     }
 }
 

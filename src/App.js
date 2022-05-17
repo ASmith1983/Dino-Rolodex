@@ -57,7 +57,11 @@ class App extends Component {
                    </div>)
           })
         } */} 
-        <SearchBox onChangeHandler= {onSearchChange} />
+        <SearchBox 
+          className= 'dino-search-box'
+          onChangeHandler= {onSearchChange} 
+          placeholder= 'search dinos'
+        />
         <CardList dinos={ filteredDinos } />
       </div>
     );
